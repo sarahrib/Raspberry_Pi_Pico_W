@@ -1,0 +1,31 @@
+//Neste exemplo iremos conectar o Raspberry Pi Pico W a um sensor de Humidade e Temperatura.
+// Os valores irão aparecer no terminal
+
+#include <DHT.h>
+
+#define DHTPIN 28
+#define DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+
+float umi = 0;
+float temp = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial1.begin(115200);
+  dht.begin();
+}
+
+void loop() {
+  umi = dht.readHumidity();
+  temp = dht.readTemperature();
+
+  Serial1.print("Humidade: ");
+  Serial1.println(umi);
+  Serial1.print("Temperatura: ");
+  Serial1.println(temp);
+
+  delay(1000);
+ 
+}
